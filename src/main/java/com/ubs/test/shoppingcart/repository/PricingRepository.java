@@ -20,7 +20,10 @@ public class PricingRepository {
 		SortedSet<PricePolicy> set = getPolicySet(item);
 
 		SortedSet<PricePolicy> headset = set.headSet(new PricePolicy(item, amount + 1));
-		return headset.last();
+		if(headset.size() > 0)
+			return headset.last();
+		else
+			return null;
 	}
 
 	private SortedSet<PricePolicy> getPolicySet(Item item) {

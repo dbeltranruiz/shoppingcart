@@ -10,6 +10,7 @@ import com.ubs.test.shoppingcart.domain.PricePolicy;
 import com.ubs.test.shoppingcart.domain.ShoppingSummary;
 import com.ubs.test.shoppingcart.repository.PricingRepository;
 import com.ubs.test.shoppingcart.services.ShoppingCartService;
+import com.ubs.test.shoppingcart.services.UndefinedNormalPriceException;
 import com.ubs.test.shoppingcart.services.impl.ShoppingCartServiceImpl;
 
 public class ShoppingCartServiceImplTest {
@@ -70,9 +71,29 @@ public class ShoppingCartServiceImplTest {
 		assertEquals(10, summary.getTotalPrice(), 0.0);
 	}
 
+	@Test
+	public void shouldClearServicel() {
+		assertEquals(11, service.addItemByAmount(createItem("A"), 11));
+		service.createOrClearSession();
+		assertEquals(11, service.addItemByAmount(createItem("A"), 11));
+	}
+	
+	@Test(expected=UndefinedNormalPriceException.class)
+	public void shouldThrowInCaseThereIsNotStandarPriceForAGivenItemWhenTotalPriceCalculationIsInvoked() {
+		assertEquals(1, service.addItemByAmount(createItem("C"), 1));
+		service.calculateSessionPrice();
+	}
+	
+	@Test(expected=UndefinedNormalPriceException.class)
+	public void shouldThrowInCaseThereIsNotStandarPriceForAGivenItemWhenShoppingSummaryCalculationIsInvoked() {
+		assertEquals(1, service.addItemByAmount(createItem("C"), 1));
+		service.calculateSessionPrice();
+	}
+	
 	private PricePolicy createPricingPolicy(String itemId, int minimalAmount, double price) {
 		return new PricePolicy(createItem(itemId), minimalAmount, price);
 	}
+	
 	private Item createItem(String id) {
 		return new Item(id, "A name", "A description");	
 	}
