@@ -16,7 +16,7 @@ This projects aims to solve the following exams task
 
 ## Assumptions in the solution
 - Items are objects which have an id an additional fields related with them. 
-- PricePolicy define the price for a given item for the defined amount of them. The normal price is also a pricing policy which requires a minimum of one item.
+- PricePolicy define the price for a given item for the defined amount of them. The normal price is also a pricing policy targeted for only one unit of the item.
 - Items implements equals and hashCode in order to became keys in maps and sets
 - PricePolicies are kept in a sorted set in oder to efficiently find them depending on the particular item and its amount. For that purpose PricePolicy implements the Comparable interface.
 - MultiplePolicies are supported for a given item. They are used in descendant order by applying as much offers for the the biggest disscount as possible and continuing with the rest of offers if there still any item remaining out of the previous offer.
