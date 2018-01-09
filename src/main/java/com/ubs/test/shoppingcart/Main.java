@@ -19,6 +19,8 @@ public class Main {
 		return pricingRepo;
 	}
 
+	//Preparing for the new feature
+
 	private static PricePolicy createPricingPolicy(String itemId, int minimalAmount, double price) {
 		return new PricePolicy(createItem(itemId), minimalAmount, price);
 	}

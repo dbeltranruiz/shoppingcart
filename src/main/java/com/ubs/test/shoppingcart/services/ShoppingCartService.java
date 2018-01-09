@@ -3,6 +3,7 @@ package com.ubs.test.shoppingcart.services;
 import com.ubs.test.shoppingcart.domain.Item;
 import com.ubs.test.shoppingcart.domain.ShoppingSummary;
 
+// Prepare por the new feature
 public interface ShoppingCartService {
 
 	/**
